@@ -37,6 +37,13 @@ declare namespace robinhood {
       trigger: TriggerType
       time: TimeInForceType
     }
+
+    interface InstrumentsOptions{
+      id?: string
+      symbol?: string
+      query?: string
+      url?: string
+    }
   }
 
   export type TagType = TagTypes
@@ -102,7 +109,8 @@ declare namespace robinhood {
      * @param callback
      */
     instruments(callback: request.RequestCallback): void
-    instruments(symbol: string, callback: request.RequestCallback): void
+    instruments(query: string, callback: request.RequestCallback): void
+    instruments(options: Options.InstrumentsOptions, callback: request.RequestCallback): void    
 
     /**
      * Get fundamental data about a symbol.

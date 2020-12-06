@@ -317,14 +317,38 @@ function RobinhoodWebApi(opts, callback) {
     );
   };
 
-  api.instruments = function (symbol, callback) {
-    return _request.get(
-      {
-        uri: _apiUrl + _endpoints.instruments,
-        qs: { query: symbol.toUpperCase() }
-      },
-      callback
-    );
+  api.instruments = function (options, callback) {
+    var requestOptions = {
+      uri: _apiUrl + _endpoints.instruments,
+    };
+    
+    if (_.isString(options)){    
+      requestOptions.qs = {
+        query: options
+      }
+    }
+    else if (_.has(options, 'id')){      
+      requestOptions.uri = uri + options.id + '/'
+    }
+    else if (_.has(options, 'symbol')){      
+      requestOptions.qs = {
+        symbol: options.symbol.toUpperCase()
+      }
+    }
+    else if (_.has(options, 'query')){
+      requestOptions.qs = {
+        query: options.query
+      }
+    }
+    else if (_.has(options, 'url')){      
+      requestOptions.uri = options.url
+    }
+    else{      
+      requestOptions.qs = {
+        query: ''
+      }
+    }    
+    return _request.get(requestOptions, callback);
   };
 
   api.popularity = function (symbol, callback) {
