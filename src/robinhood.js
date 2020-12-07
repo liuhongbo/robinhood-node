@@ -330,6 +330,11 @@ function RobinhoodWebApi(opts, callback) {
     else if (_.has(options, 'id')){      
       requestOptions.uri = uri + options.id + '/'
     }
+    else if (_.has(options, 'ids')){      
+      requestOptions.qs = {
+        ids: options.ids
+      }
+    }
     else if (_.has(options, 'symbol')){      
       requestOptions.qs = {
         symbol: options.symbol.toUpperCase()

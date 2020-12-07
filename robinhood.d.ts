@@ -40,6 +40,7 @@ declare namespace robinhood {
 
     interface InstrumentsOptions{
       id?: string
+      ids: string[]
       symbol?: string
       query?: string
       url?: string
