@@ -327,25 +327,25 @@ function RobinhoodWebApi(opts, callback) {
         query: options
       }
     }
-    else if (_.has(options, 'id')){      
+    else if (!_.isUndefined(options.id)){      
       requestOptions.uri = uri + options.id + '/'
     }
-    else if (_.has(options, 'ids')){      
+    else if (!_.isUndefined(options.ids)){      
       requestOptions.qs = {
         ids: options.ids
       }
     }
-    else if (_.has(options, 'symbol')){      
+    else if (!_.isUndefined(options.symbol)){      
       requestOptions.qs = {
         symbol: options.symbol.toUpperCase()
       }
     }
-    else if (_.has(options, 'query')){
+    else if (!_.isUndefined(options.query)){
       requestOptions.qs = {
         query: options.query
       }
     }
-    else if (_.has(options, 'url')){      
+    else if (!_.isUndefined(options.url)){      
       requestOptions.uri = options.url
     }
     else{      
