@@ -110,11 +110,11 @@ function RobinhoodWebApi(opts, callback) {
       _build_auth_header(_private.auth_token);
       _setHeaders();
       _set_account()
-        .then(function () {
+        .then(function () {          
           callback.call();
         })
-        .catch(function (err) {
-          throw err;
+        .catch(function (err) {                 
+          callback(undefined, err);
         });
     }
   }
@@ -180,9 +180,9 @@ function RobinhoodWebApi(opts, callback) {
 
   function _set_account() {
     return new Promise(function (resolve, reject) {
-      api.accounts(function (err, httpResponse, body) {
-        if (err) {
-          reject(err);
+      api.accounts(function (err, httpResponse, body) {       
+        if (err || httpResponse.statusCode != 200) {          
+          reject(err || httpResponse.statusMessage);
         }
         // Being defensive when user credentials are valid but RH has not approved an account yet
         if (
